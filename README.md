@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Aplikasi Payroll Les Privat
 
-Currently, two official plugins are available:
+Aplikasi ini dibuat menggunakan React (TypeScript) untuk menghitung dan menampilkan **pendapatan bulanan** dari kegiatan les privat berdasarkan mata pelajaran, jenjang pendidikan, dan jumlah sesi per jam.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Fitur Utama
 
-## Expanding the ESLint configuration
+- **Statistik Bulanan**: Menampilkan total pendapatan dan jumlah kelas aktif dalam satu bulan.
+- **Filter Dinamis**: Pengguna dapat memfilter data berdasarkan mata pelajaran (Fisika, Matematika, Bahasa) dan jenjang (SD, SMP, SMA).
+- **Navigasi Bulan**: Tombol navigasi untuk berpindah antar bulan dalam kalender.
+- **Tabel Interaktif**: Menampilkan daftar kelas, jenjang, dan pendapatan. Setiap baris dapat diperluas untuk melihat rincian sesi per hari.
+- **Perhitungan Otomatis**: Pendapatan dihitung berdasarkan durasi sesi, biaya per jam, dan jumlah murid (subscription).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Struktur File Utama
 
-- Configure the top-level `parserOptions` property like this:
+- **App.tsx**: Komponen utama yang mengelola tampilan statistik dan menyusun layout halaman.
+- **ExpandableTable.tsx**: Menampilkan tabel dinamis dengan fitur sorting, ekspansi, dan perhitungan pendapatan harian serta total.
+- **ComboboxDemo.tsx**: Komponen untuk dropdown filter (mata pelajaran dan jenjang).
+- **Perhitungan.ts**: Fungsi utilitas untuk menghitung total pendapatan.
+- **TableBaru.tsx**: Contoh tabel statis.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Cara Kerja Perhitungan Pendapatan
+
+1. Durasi dihitung dari waktu mulai dan akhir setiap sesi (misal: 17.00 - 18.00 = 1 jam).
+2. Biaya per jam dikalikan durasi dan jumlah subscription.
+3. Hasil dikonversi ke format mata uang Indonesia.
+
+Contoh:
+```
+Durasi = 1 jam
+Biaya per jam = Rp 100.000
+Subscription = 5 murid
+Pendapatan Hari = 1 x 100.000 x 5 = Rp 500.000
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Teknologi yang Digunakan
+
+- **React + TypeScript**
+- **Tailwind CSS**
+- **@tanstack/react-table**: Untuk tabel interaktif
+- **Lucide-react**: Untuk ikon
+- **Intl.NumberFormat**: Untuk format mata uang IDR
+
+---
+
+© 2025 - Aplikasi Payroll Les
